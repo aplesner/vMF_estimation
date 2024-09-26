@@ -1,0 +1,23 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.4.1-cuda12.1-cudnn9-devel
+
+%files
+    ./cusf /cusf
+
+%post
+    apt-get update
+
+    # Additional setup if needed
+    pip3 install --no-cache-dir --upgrade pip
+    pip3 install --no-cache-dir --upgrade scipy
+
+    # Install cusf
+    cd /cusf
+    make cusf
+
+%environment
+    export LC_ALL=C
+
+%runscript
+    python --version
+    echo "To run your script, use: apptainer exec pytorch_cuda.sif python /path/to/your/script.py"

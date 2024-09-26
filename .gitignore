@@ -1,0 +1,6 @@
+cusf/
+data/
+__pycache__/
+*.pt
+*.sif
+
